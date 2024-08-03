@@ -1,14 +1,20 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Input } from "../commons/input";
 import { Modal } from "../commons/modal";
 import { Select } from "../commons/select";
 import { useCreateProductForm } from "./use-create-product-form";
-import { ICategory } from "../../types";
+import { ICategory, IProduct } from "../../types";
 import { getAllCategoriesService } from "../../services";
 
-export const CreateProductModal = () => {
+interface IProps {
+  setProducts: (products: IProduct[]) => void;
+}
+
+export const CreateProductModal = ({ setProducts }: IProps) => {
+  const formRef = useRef<HTMLFormElement>(null);
   const { values, handleInputChange, handleImageChange, handleSubmit } =
-    useCreateProductForm();
+    useCreateProductForm({ setProducts, formRef });
+
   const [categories, setCategories] = useState<ICategory[]>([]);
 
   useEffect(() => {
@@ -28,7 +34,11 @@ export const CreateProductModal = () => {
     <Modal id="createProductModal">
       <div className="bg-white px-8 pb-8 sm:p-10 sm:pb-20 sm:pt-0">
         <h3>Crear producto</h3>
-        <form className="flex flex-col gap-y-4" onSubmit={handleSubmit}>
+        <form
+          className="flex flex-col gap-y-4"
+          onSubmit={handleSubmit}
+          ref={formRef}
+        >
           <Input
             label="Nombre"
             type="text"
@@ -90,7 +100,9 @@ export const CreateProductModal = () => {
             onChange={handleInputChange}
             options={categoriesOptions}
           />
-          <button>Crear producto</button>
+          <button type="submit" className="px-4 py-2 bg-black text-white">
+            Crear producto
+          </button>
         </form>
       </div>
     </Modal>

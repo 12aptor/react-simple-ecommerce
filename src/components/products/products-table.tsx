@@ -1,19 +1,21 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { FaEdit, FaRegTrashAlt } from "react-icons/fa";
 import { IProduct } from "../../types";
 import { getAllProductsService } from "../../services";
 
-export const ProductsTable = () => {
-  const [products, setProducts] = useState<IProduct[]>([]);
+interface IProps {
+  products: IProduct[];
+  setProducts: (products: IProduct[]) => void;
+}
 
+export const ProductsTable = ({ products, setProducts }: IProps) => {
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await getAllProductsService();
-      setProducts(response.data);
-    };
-
-    fetchData();
-  }, []);
+    getAllProductsService().then((products) => {
+      if (products) {
+        setProducts(products.data);
+      }
+    });
+  }, [setProducts]);
 
   return (
     <div className="overflow-x-auto">

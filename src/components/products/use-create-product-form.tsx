@@ -1,9 +1,14 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, RefObject, useState } from "react";
 import { IProduct } from "../../types";
 import toast from "react-hot-toast";
-import { postProductService } from "../../services";
+import { getAllProductsService, postProductService } from "../../services";
 
-export const useCreateProductForm = () => {
+interface IProps {
+  setProducts: (products: IProduct[]) => void;
+  formRef: RefObject<HTMLFormElement>;
+}
+
+export const useCreateProductForm = ({ setProducts, formRef }: IProps) => {
   const [values, setValues] = useState<IProduct>({
     name: "",
     code: "",
@@ -46,6 +51,27 @@ export const useCreateProductForm = () => {
 
       if (response.status === 201) {
         toast.success(response.json.message);
+
+        getAllProductsService().then((products) => {
+          if (products) {
+            setProducts(products.data);
+          }
+        });
+
+        setValues({
+          name: "",
+          code: "",
+          description: "",
+          image: null,
+          brand: "",
+          size: "",
+          price: 0,
+          stock: 0,
+          category_id: 0,
+        });
+
+        formRef.current?.reset();
+
         return;
       }
 
