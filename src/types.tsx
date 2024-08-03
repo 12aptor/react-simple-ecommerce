@@ -13,13 +13,13 @@ export interface IProduct {
   name: string;
   code: string;
   description: string;
-  image: string;
+  image: string | File | null;
   brand: string;
   size: string;
   price: number;
   stock: number;
-  status: boolean;
-  created_at: string;
-  updated_at: string;
+  status?: boolean;
+  created_at?: string;
+  updated_at?: string;
   category_id: number;
 }

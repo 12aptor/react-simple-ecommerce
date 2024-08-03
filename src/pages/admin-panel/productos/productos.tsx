@@ -1,8 +1,8 @@
 import { FaPlus } from "react-icons/fa";
-import { Modal } from "../../../components/commons/modal";
 import { toggleModal } from "../../../lib/helpers";
 import { Fragment } from "react/jsx-runtime";
 import { ProductsTable } from "../../../components/products/products-table";
+import { CreateProductModal } from "../../../components/products/create-product-modal";
 
 export const Productos = () => {
   return (
@@ -20,12 +20,7 @@ export const Productos = () => {
       <div className="p-5 bg-white shadow-md rounded-lg">
         <ProductsTable />
       </div>
-
-      <Modal id="createProductModal">
-        <div className="bg-white px-8 pb-8 sm:p-10 sm:pb-20 sm:pt-0">
-          <h3>Crear producto</h3>
-        </div>
-      </Modal>
+      <CreateProductModal />
     </Fragment>
   );
 };
