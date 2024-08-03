@@ -9,6 +9,7 @@ import { Buscar } from "./pages/buscar/buscar";
 import { ClientLayout } from "./components/layouts/client-layout/client-layout";
 import { AdminLayout } from "./components/layouts/admin-layout/admin-layout";
 import { AdminPanel } from "./pages/admin-panel/admin-panel";
+import { Toaster } from "react-hot-toast";
 
 const router = createBrowserRouter([
   {
@@ -44,5 +45,6 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <RouterProvider router={router} />
+    <Toaster position="top-right" />
   </React.StrictMode>
 );

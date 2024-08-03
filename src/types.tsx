@@ -3,6 +3,11 @@ export interface IError {
   message: string;
 }
 
+export interface ILogin {
+  email: string;
+  password: string;
+}
+
 export interface IProduct {
   readonly id?: number;
   name: string;

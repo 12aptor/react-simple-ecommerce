@@ -1,11 +1,19 @@
 import { Fragment, useEffect, useState } from "react";
 import { IProduct } from "../../types";
 import { ProductCard } from "../../components/products/product-card";
+import { getProductsForClientsService } from "../../services";
 
 export const Home = () => {
   const [products, setProducts] = useState<IProduct[]>([]);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await getProductsForClientsService();
+      setProducts(response.data);
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <Fragment>

@@ -8,7 +8,6 @@ export const LoginModal = () => {
 
   const openRegisterModal = () => {
     toggleModal.close("loginModal");
-    toggleModal.show("registerModal");
   };
 
   return (
@@ -33,7 +32,7 @@ export const LoginModal = () => {
             value={values.password}
             onChange={handleInputChange}
           />
-          <button className="px-4 py-2 bg-black text-white">
+          <button type="submit" className="px-4 py-2 bg-black text-white">
             Iniciar sesión
           </button>
         </form>
