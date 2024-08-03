@@ -23,3 +23,11 @@ export interface IProduct {
   updated_at?: string;
   category_id: number;
 }
+
+export interface ICategory {
+  readonly id?: number;
+  name: string;
+  status?: boolean;
+  created_at?: string;
+  updated_at?: string;
+}

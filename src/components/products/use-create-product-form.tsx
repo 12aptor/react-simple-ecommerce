@@ -1,5 +1,7 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { IProduct } from "../../types";
+import toast from "react-hot-toast";
+import { postProductService } from "../../services";
 
 export const useCreateProductForm = () => {
   const [values, setValues] = useState<IProduct>({
@@ -14,7 +16,9 @@ export const useCreateProductForm = () => {
     category_id: 0,
   });
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.currentTarget;
 
     setValues({
@@ -34,9 +38,30 @@ export const useCreateProductForm = () => {
     }
   };
 
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    try {
+      const response = await postProductService(values);
+
+      if (response.status === 201) {
+        toast.success(response.json.message);
+        return;
+      }
+
+      throw new Error(response.json.message);
+    } catch (error) {
+      if (error instanceof Error) {
+        toast.error(error.message);
+        return;
+      }
+    }
+  };
+
   return {
     values,
     handleInputChange,
     handleImageChange,
+    handleSubmit,
   };
 };

@@ -1,19 +1,34 @@
+import { useEffect, useState } from "react";
 import { Input } from "../commons/input";
 import { Modal } from "../commons/modal";
 import { Select } from "../commons/select";
 import { useCreateProductForm } from "./use-create-product-form";
+import { ICategory } from "../../types";
+import { getAllCategoriesService } from "../../services";
 
 export const CreateProductModal = () => {
-  const { values, handleInputChange, handleImageChange } =
+  const { values, handleInputChange, handleImageChange, handleSubmit } =
     useCreateProductForm();
+  const [categories, setCategories] = useState<ICategory[]>([]);
 
-  console.log(values);
+  useEffect(() => {
+    getAllCategoriesService().then((categories) => {
+      if (categories) {
+        setCategories(categories.data);
+      }
+    });
+  }, []);
+
+  const categoriesOptions = categories.map((category) => ({
+    value: category.id!.toString(),
+    label: category.name,
+  }));
 
   return (
     <Modal id="createProductModal">
       <div className="bg-white px-8 pb-8 sm:p-10 sm:pb-20 sm:pt-0">
         <h3>Crear producto</h3>
-        <form className="flex flex-col gap-y-4">
+        <form className="flex flex-col gap-y-4" onSubmit={handleSubmit}>
           <Input
             label="Nombre"
             type="text"
@@ -71,17 +86,11 @@ export const CreateProductModal = () => {
           />
           <Select
             label="Categoria"
-            options={[
-              {
-                value: "1",
-                label: "Hombre",
-              },
-              {
-                value: "2",
-                label: "Mujer",
-              },
-            ]}
+            name="category_id"
+            onChange={handleInputChange}
+            options={categoriesOptions}
           />
+          <button>Crear producto</button>
         </form>
       </div>
     </Modal>
