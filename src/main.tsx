@@ -10,6 +10,7 @@ import { ClientLayout } from "./components/layouts/client-layout/client-layout";
 import { AdminLayout } from "./components/layouts/admin-layout/admin-layout";
 import { AdminPanel } from "./pages/admin-panel/admin-panel";
 import { Toaster } from "react-hot-toast";
+import { Carrito } from "./pages/carrito/carrito";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
         path: "buscar",
         element: <Buscar />,
       },
+      {
+        path: "carrito",
+        element: <Carrito />
+      }
     ],
   },
   {

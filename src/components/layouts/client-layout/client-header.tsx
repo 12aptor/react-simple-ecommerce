@@ -9,7 +9,7 @@ export const ClientHeader = () => {
       <div className="sm:px-0 p-4 max-w-7xl w-full">
         <nav className="h-full flex">
           <div className="font-luckiest-guy text-4xl flex items-center justify-center mr-auto">
-            <Link to={"/pe"}>MODA</Link>
+            <Link to={"/"}>MODA</Link>
           </div>
           <ul className="lg:flex items-center justify-between gap-x-8 list-none hidden">
             <li className="flex items-center justify-center w-full h-full">
@@ -60,7 +60,9 @@ export const ClientHeader = () => {
             </div>
           </div>
           <div className="flex items-center justify-center pl-5 cursor-pointer">
-            <RiShoppingBag3Line className="text-2xl" />
+            <Link to={"/carrito"}>
+              <RiShoppingBag3Line className="text-2xl" />
+            </Link>
           </div>
           <div
             className="flex items-center justify-center pl-5 cursor-pointer"

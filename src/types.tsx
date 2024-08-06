@@ -24,6 +24,11 @@ export interface IProduct {
   category_id: number;
 }
 
+export interface IProductCart extends IProduct {
+  quantity: number;
+  subtotal: number;
+}
+
 export interface ICategory {
   readonly id?: number;
   name: string;
