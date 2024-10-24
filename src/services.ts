@@ -3,7 +3,7 @@ import { ILogin, IProduct } from "./types";
 
 export const getProductsForClientsService = async () => {
   try {
-    const response = await fetch(API_URL + "/product/get_all_for_clients");
+    const response = await fetch(API_URL + "/products/list/active");
 
     if (!response.ok) {
       return null;
@@ -18,7 +18,7 @@ export const getProductsForClientsService = async () => {
 
 export const getAllProductsService = async () => {
   try {
-    const response = await fetch(API_URL + "/product/get_all", {
+    const response = await fetch(API_URL + "/products/list", {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
       },
@@ -42,7 +42,7 @@ export const postProductService = async (data: IProduct) => {
     formData.append(key, data[key as keyof IProduct] as string | File);
   }
 
-  const response = await fetch(API_URL + "/product/create", {
+  const response = await fetch(API_URL + "/products/create", {
     method: "POST",
     headers: {
       Authorization: "Bearer " + localStorage.getItem("token"),
@@ -58,7 +58,7 @@ export const postProductService = async (data: IProduct) => {
 
 export const getAllCategoriesService = async () => {
   try {
-    const response = await fetch(API_URL + "/category/get_all", {
+    const response = await fetch(API_URL + "/categories/list", {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
       },
@@ -76,7 +76,7 @@ export const getAllCategoriesService = async () => {
 };
 
 export const loginService = async (data: ILogin) => {
-  const response = await fetch(API_URL + "/user/login", {
+  const response = await fetch(API_URL + "/auth/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

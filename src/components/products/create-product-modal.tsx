@@ -18,17 +18,28 @@ export const CreateProductModal = ({ setProducts }: IProps) => {
   const [categories, setCategories] = useState<ICategory[]>([]);
 
   useEffect(() => {
-    getAllCategoriesService().then((categories) => {
-      if (categories) {
-        setCategories(categories.data);
+    getAllCategoriesService().then((json) => {
+      if (json) {
+        setCategories(json.data);
       }
     });
   }, []);
 
-  const categoriesOptions = categories.map((category) => ({
-    value: category.id!.toString(),
-    label: category.name,
-  }));
+  const categoriesOptions = () => {
+    const newCategories = [
+      {
+        value: "0",
+        label: "Seleccione una categoría",
+      },
+    ];
+    categories.forEach((category) => {
+      newCategories.push({
+        value: category.id!.toString(),
+        label: category.name,
+      });
+    });
+    return newCategories;
+  };
 
   return (
     <Modal id="createProductModal">
@@ -96,9 +107,9 @@ export const CreateProductModal = ({ setProducts }: IProps) => {
           />
           <Select
             label="Categoria"
-            name="category_id"
+            name="category"
             onChange={handleInputChange}
-            options={categoriesOptions}
+            options={categoriesOptions()}
           />
           <button type="submit" className="px-4 py-2 bg-black text-white">
             Crear producto

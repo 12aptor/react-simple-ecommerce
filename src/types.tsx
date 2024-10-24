@@ -21,7 +21,7 @@ export interface IProduct {
   status?: boolean;
   created_at?: string;
   updated_at?: string;
-  category_id: number;
+  category: number;
 }
 
 export interface IProductCart extends IProduct {

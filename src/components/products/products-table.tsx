@@ -10,9 +10,9 @@ interface IProps {
 
 export const ProductsTable = ({ products, setProducts }: IProps) => {
   useEffect(() => {
-    getAllProductsService().then((products) => {
-      if (products) {
-        setProducts(products.data);
+    getAllProductsService().then((json) => {
+      if (json) {
+        setProducts(json.data);
       }
     });
   }, [setProducts]);

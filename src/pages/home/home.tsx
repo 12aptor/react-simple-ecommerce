@@ -7,14 +7,13 @@ export const Home = () => {
   const [products, setProducts] = useState<IProduct[]>([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await getProductsForClientsService();
-      setProducts(response.data);
-    };
-
-    fetchData();
+    getProductsForClientsService().then((json) => {
+      if (json) {
+        setProducts(json.data);
+      }
+    });
   }, []);
-
+  console.log(products);
   return (
     <Fragment>
       <div className="h-full min-h-[calc(100vh-80px)] flex justify-center items-center">

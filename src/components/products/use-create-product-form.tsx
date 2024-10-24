@@ -18,7 +18,7 @@ export const useCreateProductForm = ({ setProducts, formRef }: IProps) => {
     size: "",
     price: 0,
     stock: 0,
-    category_id: 0,
+    category: 0,
   });
 
   const handleInputChange = (
@@ -67,7 +67,7 @@ export const useCreateProductForm = ({ setProducts, formRef }: IProps) => {
           size: "",
           price: 0,
           stock: 0,
-          category_id: 0,
+          category: 0,
         });
 
         formRef.current?.reset();

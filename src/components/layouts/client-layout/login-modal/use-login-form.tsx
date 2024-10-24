@@ -26,8 +26,8 @@ export const useLoginForm = () => {
       const response = await loginService(values);
 
       if (response.status === 200) {
-        toast.success(response.json.message);
-        localStorage.setItem("token", response.json.data.access_token);
+        toast.success("Inicio de sesión exitoso");
+        localStorage.setItem("token", response.json.access);
         navigate("/admin-panel");
         return;
       }
