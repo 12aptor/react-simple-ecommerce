@@ -20,7 +20,7 @@ export const CreateProductModal = ({ setProducts }: IProps) => {
   useEffect(() => {
     getAllCategoriesService().then((json) => {
       if (json) {
-        setCategories(json.data);
+        setCategories(json);
       }
     });
   }, []);
@@ -55,13 +55,6 @@ export const CreateProductModal = ({ setProducts }: IProps) => {
             type="text"
             name="name"
             value={values.name}
-            onChange={handleInputChange}
-          />
-          <Input
-            label="Código"
-            type="text"
-            name="code"
-            value={values.code}
             onChange={handleInputChange}
           />
           <Input
@@ -107,7 +100,7 @@ export const CreateProductModal = ({ setProducts }: IProps) => {
           />
           <Select
             label="Categoria"
-            name="category"
+            name="category_id"
             onChange={handleInputChange}
             options={categoriesOptions()}
           />

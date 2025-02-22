@@ -27,7 +27,7 @@ export const useLoginForm = () => {
 
       if (response.status === 200) {
         toast.success("Inicio de sesión exitoso");
-        localStorage.setItem("token", response.json.access);
+        localStorage.setItem("token", response.json.access_token);
         navigate("/admin-panel");
         return;
       }

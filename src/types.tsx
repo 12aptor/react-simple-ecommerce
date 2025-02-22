@@ -11,7 +11,7 @@ export interface ILogin {
 export interface IProduct {
   readonly id?: number;
   name: string;
-  code: string;
+  code?: string;
   description: string;
   image: string | File | null;
   brand: string;
@@ -21,7 +21,7 @@ export interface IProduct {
   status?: boolean;
   created_at?: string;
   updated_at?: string;
-  category: number;
+  category_id: number;
 }
 
 export interface IProductCart extends IProduct {

@@ -6,6 +6,12 @@
 npm install
 ```
 
+## Environment variables
+
+```bash
+VITE_API_URL='http://api.example.com/api'
+```
+
 ## Usage
 
 ```bash

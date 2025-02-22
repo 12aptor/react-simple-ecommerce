@@ -12,7 +12,7 @@ export const ProductsTable = ({ products, setProducts }: IProps) => {
   useEffect(() => {
     getAllProductsService().then((json) => {
       if (json) {
-        setProducts(json.data);
+        setProducts(json);
       }
     });
   }, [setProducts]);

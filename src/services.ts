@@ -3,7 +3,7 @@ import { ILogin, IProduct } from "./types";
 
 export const getProductsForClientsService = async () => {
   try {
-    const response = await fetch(API_URL + "/products/list/active");
+    const response = await fetch(API_URL + "/products");
 
     if (!response.ok) {
       return null;
@@ -18,7 +18,7 @@ export const getProductsForClientsService = async () => {
 
 export const getAllProductsService = async () => {
   try {
-    const response = await fetch(API_URL + "/products/list", {
+    const response = await fetch(API_URL + "/products", {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
       },
@@ -42,7 +42,7 @@ export const postProductService = async (data: IProduct) => {
     formData.append(key, data[key as keyof IProduct] as string | File);
   }
 
-  const response = await fetch(API_URL + "/products/create", {
+  const response = await fetch(API_URL + "/products", {
     method: "POST",
     headers: {
       Authorization: "Bearer " + localStorage.getItem("token"),
@@ -58,7 +58,7 @@ export const postProductService = async (data: IProduct) => {
 
 export const getAllCategoriesService = async () => {
   try {
-    const response = await fetch(API_URL + "/categories/list", {
+    const response = await fetch(API_URL + "/categories", {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
       },

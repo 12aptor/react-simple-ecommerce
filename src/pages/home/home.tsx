@@ -9,11 +9,11 @@ export const Home = () => {
   useEffect(() => {
     getProductsForClientsService().then((json) => {
       if (json) {
-        setProducts(json.data);
+        setProducts(json);
       }
     });
   }, []);
-  console.log(products);
+
   return (
     <Fragment>
       <div className="h-full min-h-[calc(100vh-80px)] flex justify-center items-center">

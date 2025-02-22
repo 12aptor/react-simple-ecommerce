@@ -11,14 +11,13 @@ interface IProps {
 export const useCreateProductForm = ({ setProducts, formRef }: IProps) => {
   const [values, setValues] = useState<IProduct>({
     name: "",
-    code: "",
     description: "",
     image: null,
     brand: "",
     size: "",
     price: 0,
     stock: 0,
-    category: 0,
+    category_id: 0,
   });
 
   const handleInputChange = (
@@ -49,25 +48,24 @@ export const useCreateProductForm = ({ setProducts, formRef }: IProps) => {
     try {
       const response = await postProductService(values);
 
-      if (response.status === 201) {
-        toast.success(response.json.message);
+      if (response.status === 200) {
+        toast.success("Producto creado exitosamente");
 
         getAllProductsService().then((products) => {
           if (products) {
-            setProducts(products.data);
+            setProducts(products);
           }
         });
 
         setValues({
           name: "",
-          code: "",
           description: "",
           image: null,
           brand: "",
           size: "",
           price: 0,
           stock: 0,
-          category: 0,
+          category_id: 0,
         });
 
         formRef.current?.reset();
@@ -78,7 +76,7 @@ export const useCreateProductForm = ({ setProducts, formRef }: IProps) => {
       throw new Error(response.json.message);
     } catch (error) {
       if (error instanceof Error) {
-        toast.error(error.message);
+        toast.error("Error al crear producto");
         return;
       }
     }
